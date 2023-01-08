@@ -1,32 +1,25 @@
-SRCS = $(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS)))
- 	 
-OBJS = $(SRCS:.c=.o)
+NAME		= minishell
+SRCS		= $(shell find ./srcs -name "*.c")
+OBJS		= ${SRCS:.c=.o}
+CC			= cc
+INCLUDES	= -I./includes
+CFLAGS		=  -Wall -Werror -Wextra
+RM			= rm -f
 
-CC = cc
+.c.o :
+	${CC} ${CFLAGS} $(INCLUDES) -c $< -o ${<:.c=.o}
 
-RM = rm -f
+all : $(NAME)
+	
+$(NAME) : ${OBJS}
+	$(CC) $(CFLAGS) $(INCLUDES) ${OBJS} -o $(NAME) 
 
-CFLAGS = -c -Wall -Wextra -Werror -lreadline
-LINK = -lft -Llibft
-NAME = minishell
+clean :
+	${RM} ${OBJS} ${B_OBJS}
 
-all: lib $(NAME)
+fclean : clean
+	${RM} ${NAME}
 
-%.c:
-	$(CC) $(CFLAGS) $(SRCS)
+re : fclean all
 
-lib:
-	make -C libft
-
-$(NAME): $(OBJS)
-	$(CC) $(LINK) $(OBJS) -o $(NAME)
-
-clean:
-	$(RM) $(OBJS) libft/*.o
-
-fclean: clean
-	$(RM) $(NAME) libft/libft.a
-
-re: fclean all
-
-.PHONY: all clean fclean re bonus .c.o lib
+.PHONY : all clean fclean re
