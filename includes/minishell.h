@@ -11,22 +11,21 @@
 # include <stdbool.h>
 # include "./libft/libft.h"
 
-typedef struct s_data
-{
-	int	status;
-} t_data;
-
 
 typedef struct s_token
 {
-	int		len;
-	char	*begin;
+	char 	*value;
 	int		type;
+	struct	s_token *next;
+	struct	s_token *prev;
+	
 } t_token;
 
-typedef struct s_cmd
+typedef struct s_data
 {
-	char *cmd;
-} t_cmd;
+	char 	*cmd;
+	t_token	*token;
+	int		error_code;
+} t_data;
 
 #endif
