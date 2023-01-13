@@ -1,7 +1,6 @@
 #include "../../includes/minishell.h"
 
-int main(void)
+void	lexer(t_token)
 {
-	printf("hello world!");
-	return (0);
+	
 }

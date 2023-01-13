@@ -51,6 +51,7 @@ typedef struct s_data
 int is_space(char c);
 int is_pipe(char c);
 int is_redirect_in(char c);
-int is_redirect_ouy(char c);
+int is_redirect_out(char c);
+int is_word(char c)
 
 #endif 

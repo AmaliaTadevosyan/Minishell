@@ -15,9 +15,14 @@ int is_redirect_in(char c)
     return (c == '<');
 }
 
-int is_redirect_ouy(char c)
+int is_redirect_out(char c)
 {
     return (c == '>');
 }
 
+int is_word(char c)
+{
+    return (c != is_space(c) && c != is_pipe(c) && c != is_redirect_in(c) &&
+            c != is_redirect_out(c) && c != '"' && c != '\'');
+}
 
