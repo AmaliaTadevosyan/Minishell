@@ -11,34 +11,33 @@
 # include <stdbool.h>
 # include "../libft/libft.h"
 
-typedef int (*t_builtin_ptr)(t_list *, t_info);
+// typedef int (*t_builtin_ptr)(t_list *, t_info);
 
-typedef struct s_list
-{    
+// typedef struct s_list
+// {    
 
-} t_list;
+// } t_list;
 
-typedef struct s_info 
-{
-	t_builtin_ptr	builtins[7];
-	char 			reserved_words[7];
-	char 			**envp;
-	t_list 			envp_list;
-	int				envp_flag;
-	int				exit_t;//flag 0;
-	int				status;
+// typedef struct s_info 
+// {
+// 	t_builtin_ptr	builtins[7];
+// 	char 			reserved_words[7];
+// 	char 			**envp;
+// 	t_list 			envp_list;
+// 	int				envp_flag;
+// 	int				exit_t;//flag 0;
+// 	int				status;
 	
 
 
-} t_info;
+// } t_info;
 
 typedef struct s_token
 {
 	char 	*value;
-	int		type;
+	char	*type;
 	struct	s_token *next;
 	struct	s_token *prev;
-	
 } t_token;
 
 typedef struct s_data
@@ -48,4 +47,10 @@ typedef struct s_data
 	int		error_code;
 } t_data;
 
-#endif
+
+int is_space(char c);
+int is_pipe(char c);
+int is_redirect_in(char c);
+int is_redirect_ouy(char c);
+
+#endif 
