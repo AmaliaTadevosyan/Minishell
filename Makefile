@@ -1,25 +1,28 @@
-NAME		= minishell
-SRCS		= $(shell find ./srcs -name "*.c")
-OBJS		= ${SRCS:.c=.o}
-CC			= cc
-INCLUDES	= -I./includes
-CFLAGS		=  -Wall -Werror -Wextra
-RM			= rm -f
+NAME = minishell
+CFLAGS = -c -Wall -Wextra -Werror
+CC = cc
+RM = rm -f
 
-.c.o :
-	${CC} ${CFLAGS} $(INCLUDES) -c $< -o ${<:.c=.o}
+SRCS = $(wildcard *.c)
+OBJS = $(SRCS:.c=.o)
 
-all : $(NAME)
-	
-$(NAME) : ${OBJS}
-	$(CC) $(CFLAGS) $(INCLUDES) ${OBJS} -o $(NAME) 
+all: lib $(NAME)
 
-clean :
-	${RM} ${OBJS} ${B_OBJS}
+%.c:
+	$(CC) $(CFLAGS) $(SRCS)
 
-fclean : clean
-	${RM} ${NAME}
+lib:
+	make -C libft
 
-re : fclean all
+$(NAME): $(OBJS)
+	$(CC) $(LINK) $(OBJS) -o $(NAME) libft/*.o
 
-.PHONY : all clean fclean re
+clean:
+	$(RM) $(OBJS) libft/*.o
+
+fclean: clean
+	$(RM) $(NAME) libft/libft.a
+
+re: fclean all
+
+.PHONY: all clean fclean re bonus .c.o lib

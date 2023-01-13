@@ -1,16 +1,7 @@
 #include "../includes/minishell.h"
 
-void next()
+int main(void)
 {
-	char *last_pos;
-	int hash;
-
-	while (token = *src)
-	{
-		++src;
-		//Parse token
-		if (token == '\n')
-			++line;
-	}
-	return;
+	printf("hello world!");
+	return (0);
 }

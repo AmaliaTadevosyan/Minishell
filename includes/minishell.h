@@ -9,8 +9,28 @@
 # include <limits.h>
 # include <term.h>
 # include <stdbool.h>
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 
+typedef int (*t_builtin_ptr)(t_list *, t_info);
+
+typedef struct s_list
+{    
+
+} t_list;
+
+typedef struct s_info 
+{
+	t_builtin_ptr	builtins[7];
+	char 			reserved_words[7];
+	char 			**envp;
+	t_list 			envp_list;
+	int				envp_flag;
+	int				exit_t;//flag 0;
+	int				status;
+	
+
+
+} t_info;
 
 typedef struct s_token
 {
