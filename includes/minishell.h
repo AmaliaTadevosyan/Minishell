@@ -48,10 +48,11 @@ typedef struct s_data
 } t_data;
 
 
-int is_space(char c);
-int is_pipe(char c);
-int is_redirect_in(char c);
-int is_redirect_out(char c);
-int is_word(char c)
+int     is_space(char c);
+int     is_pipe(char c);
+int     is_redirect_in(char c);
+int     is_redirect_out(char c);
+int     is_word(char c);
+void    ft_echo(char *str);
 
 #endif 

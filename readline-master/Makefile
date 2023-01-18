@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/amsryan/Desktop/aaa/readline-master
+BUILD_DIR = /Users/tumolabs/Desktop/Minishell/readline-master
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /Users/amsryan/Desktop/aaa/ashhov_readline
+prefix = /Users/tumolabs/Desktop/Minishell/rd
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share

@@ -4,23 +4,23 @@ int check_symbol(char *str)
 {
     int i;
     i = 0;
-
-    while (str[i])
+    if(str[i] == '-')
     {
-        if (str[i] == '-')
-        {
-            i++;
-            if(str[i] && str[i] == 'n')
-                return (1);
-        }
+    i++;
+    while (str[i] && str[i] == 'n') 
+    {
+        i++;
+    }
+        if(str[i] == '\0')
+         return (1);
+    
         else 
             return (0);
     }
     return (0);
 }
 
-
-void    echo(char *str)
+void    ft_echo(char *str)
 {
     int     i;
     int     flag;
@@ -34,8 +34,12 @@ void    echo(char *str)
     {
         if(check_symbol(ptr[i]) == 0)
         {
-            write(1, &ptr[i], ft_strlen(ptr[i]));
+            write(1, ptr[i], ft_strlen(ptr[i]));
             i++;
+            if(ptr[i + 1] == '\0')
+            {
+                write(1, " ", 1);
+            }
         }
         else
         {
