@@ -27,9 +27,6 @@
 // 	int				envp_flag;
 // 	int				exit_t;//flag 0;
 // 	int				status;
-	
-
-
 // } t_info;
 
 typedef struct s_token
@@ -54,5 +51,6 @@ int     is_redirect_in(char c);
 int     is_redirect_out(char c);
 int     is_word(char c);
 void    ft_echo(char *str);
+void    ft_pwd();
 
 #endif 

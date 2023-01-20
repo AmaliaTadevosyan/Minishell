@@ -37,6 +37,13 @@
 // 	return (0);
 // }
 
+void    ft_pwd()
+{
+    char    cwd[356];
+    getcwd(cwd, sizeof(cwd));
+    printf("%s\n", cwd);
+}
+
 int main(void)
 {
     char *cmd;
@@ -49,7 +56,8 @@ int main(void)
         cmd = readline("minishell$ ");
         //printf("%s\n", cmd);
         line = ft_split(cmd, ' ');
-        ft_echo(&cmd[5]);
+        // ft_echo(&cmd[5]);
+        ft_pwd(&cmd[5]);
     }
     return (0);
 } 
