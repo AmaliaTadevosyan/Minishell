@@ -1,32 +1,58 @@
+RED="\033[1;31m"
+GREEN='\033[3;32m'
+NONE='\033[0m'
+
+PREFIX = $(shell find ${HOME} -name rd 2>/dev/null)
+
 NAME = minishell
-CFLAGS = -lreadline -Wall -Wextra -Werror 
+
 CC = cc
+
+CFLAGS = -Wall -Werror -Wextra
+
+SRCS = $(wildcard *.c) $(wildcard srcs/*.c)
+
+OBJS = $(patsubst %.c, %.o, $(SRCS))
+
+INCLUDES = -ILibft  -I./rd/include
+
+LINKERS	= -L./libft  -L./rd/lib -lreadline
+
+LINKERLIB = ./libft/libft.a
+
+LIBFT = ./libft
+
 RM = rm -f
 
-SRCS = $(shell find ./srcs -name "*.c")
-OBJS = $(SRCS:.c=.o)
+%.o: %.c
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-LIBFT = ./libft/libft.a
-
-all: $(LIBFT) $(NAME)
-
-%.c:
-	$(CC) $(CFLAGS) -c $(SRCS)
-
-$(LIBFT):
-	make -C libft
-
+all: readline $(NAME) 
+all: $(NAME) 
+	
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME) $(LIBFT)
+	@$(MAKE) -C $(LIBFT)
+	@cp $(LINKERLIB) $(NAME)
+	@ar -rcs $(NAME) $(OBJS)
+	@$(CC) $(CFLAGS) $(LINKERS) $(INCLUDES) $(NAME) -o $(NAME)
+	@echo $(NONE) $(GREEN)"       >Compiled< $(NAME)" $(NONE)
 
 clean:
-	$(RM) $(OBJS)
-	make clean -C libft
+	@$(MAKE) clean -C $(LIBFT)
+	@$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME) libft/libft.a
-	make fclean -C libft
+	@$(MAKE) fclean -C $(LIBFT)
+	@$(RM) $(NAME)
+	@stty sane
+	@echo $(NONE) $(RED)"       >Removed< $(NAME)" $(NONE)
+
+readline: 
+	cd readline-master && make clean && ./configure --prefix=$(PREFIX) && make && make install
 
 re: fclean all
 
-.PHONY: all clean fclean re lib
+norm: clean
+	norminette $(SRCS)
+
+.PHONY: all clean fclean re

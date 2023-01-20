@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdio.h>
+#include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
@@ -29,6 +30,11 @@
 // 	int				status;
 // } t_info;
 
+typedef struct s_shell
+{
+	int	exit_status;
+} t_shell;
+
 typedef struct s_token
 {
 	char 	*value;
@@ -51,6 +57,6 @@ int     is_redirect_in(char c);
 int     is_redirect_out(char c);
 int     is_word(char c);
 void    ft_echo(char *str);
-void    ft_pwd();
+void    ft_pwd(char *cwd);
 
 #endif 

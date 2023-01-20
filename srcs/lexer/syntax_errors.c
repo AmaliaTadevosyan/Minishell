@@ -1,12 +1,12 @@
-#include "../../includes/minishell.h"
+// #include "../../includes/minishell.h"
 
-int check_quotes(char *str)
-{
-    int i;
+// int check_quotes(char *str)
+// {
+//     int i;
 
-    i = 0;
-    while (str[i])
-    {
+//     i = 0;
+//     while (str[i])
+//     {
         
-    }
-}
+//     }
+// }

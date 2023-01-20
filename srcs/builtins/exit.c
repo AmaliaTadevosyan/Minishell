@@ -1,4 +1,5 @@
 #include "../../includes/minishell.h"
+
 int is_digit(char *str)
 {
     int i = 0;
@@ -11,26 +12,57 @@ int is_digit(char *str)
     return (0);
 }
 
-void check_digit(int c, char **v)
+int is_char(char *str)
 {
-    if (c >= 3)
+    int i;
+
+    i = 0;
+    while (str[i])
     {
-        if (is_digit(v[2]))
-        {
-            printf("exit: too many arguments\n");
-            exit(0);
+        if (ft_isalpha(str[i]))
+        {   
+            printf("exit: %s : numeric argument required", str[i]);
+            return (1);
         }
+        i++;
     }
+    return (0);
 }
 
-void check_char(int c, char **v)
+int exit(t_shell *shell, char *str)
 {
-    if (c >= 3)
+    long double max;
+    char  **line;
+
+    max = 9223372036854775807;
+    
+    line = ft_split(str, ' ');
+    if (line[0] && !line[1])
     {
-        if (ft_isalpha(v[2][0]))
-        {
-            printf("exit: %s : numeric argument required", v[2]);
-            exit(0);
-        }
+      shell->exit_status = 0;
+      exit(shell->exit_status);
+    }
+    else if (line[0] && !is_digit(line[1]))
+    {
+       shell->exit_status = ft_atoi(str[1] % 256);
+       exit(shell->exit_status);
+    }
+    else if (!is_char(line[1]))
+    {
+        printf("exit: %s : numeric argument required", line[1]);
+        shell->exit_status = 255;
+        exit(shell->exit_status);
+    }
+    else if (line[0] && is_digit(line[1]) && line[2])
+    {
+        printf("exit: too many arguments\n");
+        shell->exit_status = 1;
+        exit(1);
+    }
+    else if (ft_atoi(line[1]) > max)
+    {
+         printf("exit: %s : numeric argument required", line[1]);
+         shell->exit_status = 255;
+         exit(shell->exit_status);
     }
 }
