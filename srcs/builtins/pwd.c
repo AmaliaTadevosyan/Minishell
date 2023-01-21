@@ -2,7 +2,6 @@
 
 void    ft_pwd(char *cwd)
 {
-    char    cwd[356];
-    getcwd(cwd, sizeof(cwd));
+    getcwd(cwd, 356);
     printf("%s\n", cwd);
 }

@@ -4,13 +4,14 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdio.h>
-#include <stdlib.h>
+# include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
 # include <term.h>
 # include <stdbool.h>
 # include "../libft/libft.h"
+# include "errno.h"
 
 // typedef int (*t_builtin_ptr)(t_list *, t_info);
 
@@ -48,6 +49,7 @@ typedef struct s_data
 	char 	*cmd;
 	t_token	*token;
 	int		error_code;
+	t_shell shell;
 } t_data;
 
 
@@ -58,5 +60,7 @@ int     is_redirect_out(char c);
 int     is_word(char c);
 void    ft_echo(char *str);
 void    ft_pwd(char *cwd);
+int		ft_exit(char *str);
+int 	ft_cd(char *str);
 
 #endif 

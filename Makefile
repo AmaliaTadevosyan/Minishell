@@ -8,9 +8,9 @@ NAME = minishell
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 
-SRCS = $(wildcard *.c) $(wildcard srcs/*.c)
+SRCS = $(wildcard *.c) $(wildcard srcs/*.c) $(wildcard srcs/builtins/*.c)
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
