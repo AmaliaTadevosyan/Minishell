@@ -3,72 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amtadevo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:51:52 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/03/19 17:52:06 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:05:19 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:05:20 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-static int	count_words(const char *str, char c)
+static int	ft_wordcount(char const *s, char c)
 {
 	int	i;
-	int	trigger;
+	int	flag;
+	int	k;
 
 	i = 0;
-	trigger = 0;
-	while (*str)
+	flag = 1;
+	k = 0;
+	while (s[i])
 	{
-		if (*str != c && trigger == 0)
+		if (s[i] == c)
+			flag = 1;
+		else if (flag)
 		{
-			trigger = 1;
-			i++;
+			k++;
+			if (s[i] != '\0' && s[i] != c)
+				flag = 0;
 		}
-		else if (*str == c)
-			trigger = 0;
-		str++;
+		i++;
 	}
-	return (i);
+	return (k);
 }
 
-static char	*word_dup(const char *str, int start, int finish)
+static int	ft_wordlen(char const *s, char c, int i)
 {
-	char	*word;
-	int		i;
+	int	len;
 
-	i = 0;
-	word = malloc((finish - start + 1) * sizeof(char));
-	while (start < finish)
-		word[i++] = str[start++];
-	word[i] = '\0';
-	return (word);
+	len = 0;
+	while (s[i] && s[i] != c)
+	{
+		i++;
+		len++;
+	}
+	return (len);
+}
+
+static char	*ft_strdup2(const char *s, char c, int len, int *i)
+{
+	char	*ptr;
+	int		j;
+
+	j = 0;
+	ptr = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ptr)
+		return (NULL);
+	while (s[*i] && s[*i] != c)
+	{
+		ptr[j] = s[*i];
+		j++;
+		*i += 1;
+	}
+	ptr[j] = '\0';
+	return (ptr);
+}
+
+static void	*ft_free(char **splitted, int j)
+{
+	while (splitted[j])
+	{
+		free(splitted[j]);
+		j++;
+	}
+	free(splitted);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	int		index;
-	char	**split;
+	char	**splitted;
+	int		i;
+	int		j;
 
-	split = malloc((count_words(s, c) + 1) * sizeof(char *));
-	if (!s || !(split))
-		return (0);
 	i = 0;
 	j = 0;
-	index = -1;
-	while (i <= ft_strlen(s))
+	if (!s)
+		return (NULL);
+	splitted = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
+	if (!splitted)
+		return (NULL);
+	while (s[i])
 	{
-		if (s[i] != c && index < 0)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		if (s[i] != c)
 		{
-			split[j++] = word_dup(s, index, i);
-			index = -1;
+			splitted[j] = ft_strdup2(s, c, ft_wordlen(s, c, i) + 1, &i);
+			if (!splitted[j++])
+				return (ft_free(splitted, j - 1));
 		}
+		if (!s[i])
+			break ;
 		i++;
 	}
-	split[j] = 0;
-	return (split);
+	splitted[j] = NULL;
+	return (splitted);
 }

@@ -3,39 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amtadevo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:53:46 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/03/19 17:53:56 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:05:52 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:05:53 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
-	int		i;
-	int		len1;
-	int		len2;
+	char	*joined;
+	size_t	len1;
+	size_t	len2;
 
-	if (s1 && s2)
-	{
-		len1 = ft_strlen(s1);
-		len2 = ft_strlen(s2);
-		str = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
-		if (str == NULL)
-			return (NULL);
-		i = -1;
-		while (s1[++i])
-			str[i] = s1[i];
-		i = -1;
-		while (s2[++i])
-		{
-			str[len1] = s2[i];
-			len1++;
-		}
-		str[len1] = '\0';
-		return (str);
-	}
-	return (NULL);
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	joined = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!joined)
+		return (NULL);
+	ft_strlcpy(joined, s1, len1 + 1);
+	ft_strlcat(joined, s2, len1 + len2 + 1);
+	return (joined);
 }

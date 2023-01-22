@@ -37,16 +37,26 @@
 // 	return (0);
 // }
 
+void    print_token(t_token *token)
+{
+    while (token)
+    {
+        printf("token->type: %s\n", token->type);
+        printf("token->value: %d\n", token->value);
+        token = token->next;
+    }
+}
+
 int main()
 {
-    char *cmd;
-    char **line;
+    // char *cmd;
+    // char **line;
 
-    while(1)
-    {
-        cmd = readline("minishell$ ");
+    // while(1)
+    // {
+        // cmd = readline("minishell$ ");
         //printf("%s\n", cmd);  
-        line = ft_split(cmd, ' ');
+        // line = ft_split(cmd, ' ');
         // ft_echo(&cmd[5]);
         // int i = 0;
         // while (cmd[i])
@@ -62,8 +72,13 @@ int main()
         // }
         // printf("cmd[5]: %c\n", cmd[5]);
         // ft_cd(line[1]);
-        ft_exit(cmd);
+        // ft_exit(cmd);
+        // char *line =  "    >> amalia  >>b>>c<t<o>p<<t<<u ls <t >u -la";
+        char *line =  "'echo'  \"cd\"";
+        t_token *token = malloc(sizeof(t_token));
+        create_token(token, line);
+        print_token(token);
         // ft_pwd(&cmd[3]);
-    }
+    // }
     return (0);
 } 

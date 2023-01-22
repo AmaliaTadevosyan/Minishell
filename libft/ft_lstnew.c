@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 17:05:45 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/11/22 17:05:46 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:03:20 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:03:21 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+t_token	*ft_lstnew(int data)
 {
-	unsigned int	i;
+	t_token	*new_node;
 
-	i = 0;
-	if (s == NULL)
-		return ;
-	while (s[i])
-	{
-		f(i, &s[i]);
-		i++;
-	}
+	new_node = (t_token *)malloc(sizeof(t_token));
+	if (new_node == NULL)
+		return (NULL);
+	new_node -> data = data;
+	new_node -> next = NULL;
+	return (new_node);
 }

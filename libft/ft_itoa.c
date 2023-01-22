@@ -3,67 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amtadevo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:47:25 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/03/19 17:47:37 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:01:38 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:01:39 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-static int	ft_count(int n)
+static char	*ft_array(char *x, unsigned int number, long int len)
 {
-	unsigned int	nbr;
-	int				i;
-
-	i = 1;
-	if (n < 0)
+	while (number > 0)
 	{
-		nbr = -n;
-		i++;
+		x[len--] = (number % 10) + '0';
+		number = number / 10;
 	}
-	else
-		nbr = n;
-	while (nbr / 10 > 0)
-	{
-		i++;
-		nbr = nbr / 10;
-	}
-	return (i);
+	return (x);
 }
 
-char	*loop(unsigned int nb, size_t size, char *str)
+static long int	ft_len(int n)
 {
-	while (nb != 0)
+	int					len;
+
+	len = 0;
+	if (n <= 0)
+		len = 1;
+	while (n != 0)
 	{
-		str[size--] = (nb % 10) + '0';
-		nb = nb / 10;
+		len++;
+		n = n / 10;
 	}
-	return (str);
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	size_t			size;
-	unsigned int	nb;
-	char			*str;
+	char				*x;
+	long int			len;
+	unsigned int		number;
 
-	nb = n;
-	size = ft_count(n);
-	str = (char *)malloc(sizeof(char) * (size + 1));
-	if (!str)
+	len = ft_len(n);
+	x = (char *)malloc(sizeof(char) * (len + 1));
+	if (x == NULL)
 		return (NULL);
+	x[len--] = '\0';
 	if (n == 0)
-	{
-		str[0] = '0';
-		str[1] = '\0';
-	}
+		x[0] = '0';
 	if (n < 0)
 	{
-		nb = -n;
-		*str = '-';
+		number = n * -1;
+		x[0] = '-';
 	}
-	str[size--] = '\0';
-	loop(nb, size, str);
-	return (str);
+	else
+		number = n;
+	x = ft_array(x, number, len);
+	return (x);
 }

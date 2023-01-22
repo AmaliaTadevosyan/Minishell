@@ -10,7 +10,7 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 
-SRCS = $(wildcard *.c) $(wildcard srcs/*.c) $(wildcard srcs/builtins/*.c)
+SRCS = $(wildcard *.c) $(wildcard srcs/*.c) $(wildcard srcs/builtins/*.c) $(wildcard srcs/lexer/*.c)
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 

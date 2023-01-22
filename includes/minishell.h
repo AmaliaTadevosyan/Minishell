@@ -31,18 +31,29 @@
 // 	int				status;
 // } t_info;
 
+typedef enum
+{
+	PIPE,        // |
+	RED_IN,      // >
+	RED_OUT,     // <
+	APPEND,      // >>
+	HERE_DOC,    // <<
+	SEP,       // " "
+	SEMI_COLON   // ;
+} consts;
+
 typedef struct s_shell
 {
 	int	exit_status;
 } t_shell;
 
-typedef struct s_token
-{
-	char 	*value;
-	char	*type;
-	struct	s_token *next;
-	struct	s_token *prev;
-} t_token;
+// typedef struct s_token
+// {
+// 	int		value;
+// 	char	*type;
+// 	struct	s_token *next;
+// 	struct	s_token *prev;
+// } t_token;
 
 typedef struct s_data
 {
@@ -62,5 +73,6 @@ void    ft_echo(char *str);
 void    ft_pwd(char *cwd);
 int		ft_exit(char *str);
 int 	ft_cd(char *str);
+void    create_token(t_token *token, char *str);
 
 #endif 

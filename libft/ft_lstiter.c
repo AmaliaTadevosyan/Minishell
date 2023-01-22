@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 17:05:45 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/11/22 17:05:46 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:02:35 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:02:36 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+void	ft_lstiter(t_token *lst, void *(*f)(int))
 {
-	unsigned int	i;
+	t_token	*tmp;
 
-	i = 0;
-	if (s == NULL)
-		return ;
-	while (s[i])
+	tmp = lst;
+	while (tmp)
 	{
-		f(i, &s[i]);
-		i++;
+		f(tmp->data);
+		tmp = tmp -> next;
 	}
 }

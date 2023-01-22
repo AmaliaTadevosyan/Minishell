@@ -1,36 +1,34 @@
-SRCS = $(shell find "." -name "*.c" ! -name "ft_lst*.c")
- 	 
-OBJS = $(SRCS:.c=.o)
+NAME	= libft.a
 
-BONUS = $(shell find "." -name "ft_lst*.c")
+CC		= cc
+CFLAGS	= -Wall -Werror -Wextra# -fsanitize=address
+AR		= ar rcs
+RM		= rm -f
 
-BONUS_OBJS = $(BONUS:.c=.o)
+SRCS_A	=	$(wildcard ft_*.c)
+SRCS_B	=	$(wildcard ft_lst*.c)
+SRCS	=	$(filter-out $(SRCS_B), $(SRCS_A))
 
-CC = gcc
+OBJS	=	$(patsubst %.c, %.o, $(SRCS))
+OBJS_B	=	$(patsubst %.c, %.o, $(SRCS_B))
 
-RM = rm -f
+%.o: %.c
+			$(CC) $(CFLAGS) -c $< -o $@
 
-CFLAGS = -Wall -Wextra -Werror -I.
+all:		$(NAME)
 
-NAME = libft.a
+$(NAME):	$(OBJS)
+			$(AR) $(NAME) $(OBJS)
 
-all: $(NAME)
-
-$(NAME):
-	$(CC) -c $(SRCS)
-	ar rc ${NAME} $(OBJS)
-	ranlib ${NAME}
-
-bonus: $(BONUS_OBJS)
-	ar rc ${NAME} $(BONUS_OBJS)
+bonus:		$(NAME) $(OBJS_B)
+			$(AR) $(NAME) $(OBJS_B)
 
 clean:
-	$(RM) $(OBJS)
-	$(RM) $(BONUS_OBJS)
+			$(RM) $(OBJS) $(OBJS_B)
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:		clean
+			$(RM) $(NAME)
 
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re bonus .c.o
+.PHONY:		all bonus clean fclean re
