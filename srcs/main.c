@@ -1,52 +1,83 @@
 #include "../includes/minishell.h"
 
-// int main(int c, char **v)
-// {
-// 	t_redirect	*ptr;
-// 	t_redirect	*head;
-// 	char		**argv;
-	
-// 	int i = 0;
-// 	int	x;
-// 	int start;
-// 	char *name;
-// 	ptr = malloc(sizeof(t_redirect));
-// 	head = ptr;
-// 	char *line =  "    >> amalia  >>b>>c<t<o>p<<t<<u ls <t >u -la";
-// 	x = 1;
-// 	while (line[i] != '\0')
-// 	{
-// 		if (is_redirect_in(line[i]) || is_redirect_out(line[i]))
-// 		{
-// 			if (is_append(line[i], line[i + 1]))
-// 				x++;
-// 			ptr->flag = ft_substr(line, i, x);
-// 			i += x;
-// 			while (is_space(line[i]))
-// 				i++;
-// 			start = i;
-// 			while (!ft_strchr(METACHARACTER, line[i]))
-//                 i++;
-// 			ptr->f_name = ft_substr(line, start, i - start);
-// 			ptr->next = malloc(sizeof(t_redirect));
-// 			ptr = ptr->next;
-// 			x = 1;
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-void    print_token(t_token *token)
+void    print_redirect(t_redirect *token)
 {
     while (token)
     {
-        printf("token->type: %s\n", token->type);
-        printf("token->value: %d\n", token->value);
+        printf("token->flag: %s\n", token->flag);
+        printf("token->value: %s\n", token->f_name);
         token = token->next;
     }
 }
 
+bool    booool(char *line, int i)
+{
+    while (line[i])
+    {
+        if (!is_redirect_in(line[i]) && !is_redirect_out(line[i]) && is_append(line[i], line[i - 1]))
+            return (1);
+        i--;
+    }
+    return (0);
+}
+
+void    get_cmd(char *line)
+{
+    t_cmd   *head;
+    t_cmd   *cmd;
+    // char    *line =  "a    >> amalia  >>b1>>c<t<o>p<<t<<u lfrt456      ls j <t >u -la";
+
+    int i;
+    int j;
+
+    i = 0;
+    while (line[i])
+    {
+        if (i > 0 && !booool(line, i))
+            printf("booool: %c\n", line[i]);
+        i++;
+    }
+}
+
+int main(int c, char **v)
+{
+	t_redirect	*ptr;
+	t_redirect	*head;
+	char		**argv;
+	int i = 0;
+	int	x;
+	int start;
+	char *name;
+	ptr = malloc(sizeof(t_redirect));
+	head = ptr;
+	char *line =  "    >> amalia  >>b>>c<t<o>p<<t<<u ls <t >u -la";
+	x = 1;
+	while (line[i] != '\0')
+	{
+		if (is_redirect_in(line[i]) || is_redirect_out(line[i]))
+		{
+			if (is_append(line[i], line[i + 1]))
+				x++;
+			ptr->flag = ft_substr(line, i, x);
+			i += x;
+			while (is_space(line[i]))
+				i++;
+			start = i;
+			while (!ft_strchr(METACHARACTER, line[i]))
+                i++;
+			ptr->f_name = ft_substr(line, start, i - start);
+			ptr->next = malloc(sizeof(t_redirect));
+			ptr = ptr->next;
+			x = 1;
+		}
+		i++;
+	}
+    // print_redirect(head);
+    get_cmd(line);
+	return (0);
+}
+
+/*
 int main()
 {
     // char *cmd;
@@ -68,17 +99,21 @@ int main()
         // while (line[i])
         // {
         //     printf("line[%d]= %s\n", i, line[i]);
-        //     i++;
+            // i++;
         // }
         // printf("cmd[5]: %c\n", cmd[5]);
         // ft_cd(line[1]);
         // ft_exit(cmd);
-        // char *line =  "    >> amalia  >>b>>c<t<o>p<<t<<u ls <t >u -la";
-        char *line =  "'echo'  \"cd\"";
-        t_token *token = malloc(sizeof(t_token));
-        create_token(token, line);
-        print_token(token);
-        // ft_pwd(&cmd[3]);
+        // printf("hello\n");
+        // char *line =  "    >>amalia >>b>>c<t<o>p<<t<<u ls <t >u -la";
+        // // char *line =  "'echo'  \"cd\"";
+        // // t_redirect *token = malloc(sizeof(t_redirect));
+        t_redirect *tmp;
+
+        // tmp = create_token(line);
+        // print_redirect(tmp);
+        // ft_pwd(&cmd[3]);1
     // }
     return (0);
 } 
+*/

@@ -60,7 +60,7 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
-t_token		*ft_lstnew(int data);
+t_token		*ft_lstnew(char *type, int data);
 void		ft_lstadd_front(t_token **lst, t_token *new);
 int			ft_lstsize(t_token *lst);
 t_token		*ft_lstlast(t_token *lst);

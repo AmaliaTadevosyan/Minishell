@@ -19,7 +19,7 @@ void	ft_lstclear(t_token **lst, void (*del)(int))
 	while (*lst != NULL)
 	{
 		tmp = (*lst)->next;
-		del((*lst)->data);
+		del((*lst)->value);
 		free(*lst);
 		*lst = tmp;
 	}

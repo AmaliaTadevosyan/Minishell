@@ -8,15 +8,15 @@ NAME = minishell
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
+CFLAGS = #-Wall -Werror -Wextra #-fsanitize=address
 
 SRCS = $(wildcard *.c) $(wildcard srcs/*.c) $(wildcard srcs/builtins/*.c) $(wildcard srcs/lexer/*.c)
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
-INCLUDES = -ILibft  -I./rd/include
+INCLUDES = -I./includes
 
-LINKERS	= -L./libft  -L./rd/lib -lreadline
+LINKERS	= -L./libft -lft  -lreadline# -L./rd/lib
 
 LINKERLIB = ./libft/libft.a
 
@@ -27,14 +27,12 @@ RM = rm -f
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-all: readline $(NAME) 
+# all: readline $(NAME) 
 all: $(NAME) 
 	
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT)
-	@cp $(LINKERLIB) $(NAME)
-	@ar -rcs $(NAME) $(OBJS)
-	@$(CC) $(CFLAGS) $(LINKERS) $(INCLUDES) $(NAME) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LINKERS) $(INCLUDES) -o $(NAME)
 	@echo $(NONE) $(GREEN)"       >Compiled< $(NAME)" $(NONE)
 
 clean:
@@ -44,11 +42,11 @@ clean:
 fclean: clean
 	@$(MAKE) fclean -C $(LIBFT)
 	@$(RM) $(NAME)
-	@stty sane
-	@echo $(NONE) $(RED)"       >Removed< $(NAME)" $(NONE)
+	# @stty sane
+	# @echo $(NONE) $(RED)"       >Removed< $(NAME)" $(NONE)
 
-readline: 
-	cd readline-master && make clean && ./configure --prefix=$(PREFIX) && make && make install
+# readline: 
+# 	cd readline-master && make clean && ./configure --prefix=$(PREFIX) && make && make install
 
 re: fclean all
 

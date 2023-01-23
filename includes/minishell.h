@@ -30,6 +30,7 @@
 // 	int				exit_t;//flag 0;
 // 	int				status;
 // } t_info;
+# define METACHARACTER "|&;<>() \n\t"
 
 typedef enum
 {
@@ -39,8 +40,17 @@ typedef enum
 	APPEND,      // >>
 	HERE_DOC,    // <<
 	SEP,       // " "
-	SEMI_COLON   // ;
+	SEMI_COLON,   // ;
+	WORD,         // "blah"
 } consts;
+
+typedef struct s_redirect
+{
+	char *f_name;
+	char *flag;
+	char *type;
+	struct s_redirect *next;
+} t_redirect;
 
 typedef struct s_shell
 {
@@ -63,6 +73,14 @@ typedef struct s_data
 	t_shell shell;
 } t_data;
 
+typedef struct s_cmd
+{
+	char 			*cmd;
+	char			*options;
+	struct s_cmd	*next;
+} t_cmd;
+
+
 
 int     is_space(char c);
 int     is_pipe(char c);
@@ -73,6 +91,8 @@ void    ft_echo(char *str);
 void    ft_pwd(char *cwd);
 int		ft_exit(char *str);
 int 	ft_cd(char *str);
-void    create_token(t_token *token, char *str);
+t_token	*create_token(char *str);
+bool	is_append(char c, char d);
+
 
 #endif 

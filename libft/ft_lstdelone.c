@@ -14,6 +14,6 @@
 
 void	ft_lstdelone(t_token *lst, void (*del)(int))
 {
-	del(lst->data);
+	del(lst->value);
 	free(lst);
 }

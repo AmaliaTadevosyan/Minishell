@@ -19,7 +19,7 @@ void	ft_lstiter(t_token *lst, void *(*f)(int))
 	tmp = lst;
 	while (tmp)
 	{
-		f(tmp->data);
+		f(tmp->value);
 		tmp = tmp -> next;
 	}
 }
