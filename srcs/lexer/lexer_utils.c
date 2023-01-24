@@ -22,8 +22,8 @@ int is_redirect_out(char c)
 
 int is_word(char c)
 {
-    return (c != is_space(c) && c != is_pipe(c) && c != is_redirect_in(c) &&
-            c != is_redirect_out(c) && c != '"' && c != '\'');
+    return (c == is_space(c) && c == is_pipe(c) && c == is_redirect_in(c) &&
+            c == is_redirect_out(c) && c == '"' && c == '\'');
 }
 
 bool	is_append(char c, char d)

@@ -14,8 +14,20 @@ bool    booool(char *line, int i)
 {
     while (line[i])
     {
-        if (!is_redirect_in(line[i]) && !is_redirect_out(line[i]) && is_append(line[i], line[i - 1]))
+        // printf("%d i\n", i);
+        while(is_space(line[i]))
+        {
+               printf("line[i] == %c\n", line[i]);
+                i--;
+        }
+           
+        // printf("%d i = \n", i);
+        printf("line[i] == %c\n", line[i]);
+        if (!is_redirect_in(line[i]) && !is_redirect_out(line[i]) && !is_append(line[i], line[i - 1]))
+        {
             return (1);
+        }
+            
         i--;
     }
     return (0);
@@ -25,17 +37,39 @@ void    get_cmd(char *line)
 {
     t_cmd   *head;
     t_cmd   *cmd;
-    // char    *line =  "a    >> amalia  >>b1>>c<t<o>p<<t<<u lfrt456      ls j <t >u -la";
+    // char    *line =  "a1111    >> amalia  >>b1>>c<t<o>p<<t<<u lfrt456      ls j <t >u -la";
+    // char    *lin =  "< a1111    >>";
+    int flag;
+    flag = 0;
+    int start;
+    char *str;
+    int i = 0;
 
-    int i;
-    int j;
-
-    i = 0;
-    while (line[i])
+    while (line[i] != '\0')
     {
-        if (i > 0 && !booool(line, i))
-            printf("booool: %c\n", line[i]);
+        if (is_redirect_in(line[i]) || is_redirect_out(line[i]))
+        {
+            i++;
+            if (is_append(line[i - 1], line[i]))
+                i++;
+            flag = 1;
+        }
+        while (is_space(line[i]))
+            i++;
+          start = i;
+        // printf("start %d\n", start);
+        // printf("flag: %d\n", flag);
+        if (ft_isalpha(line[i]))
+        {
+            i++;
+        }     
+      
         i++;
+        if (flag == 1)
+        {
+            str = ft_substr(line, start, i - start);
+            printf("str: %s\n", str);
+        }
     }
 }
 
@@ -50,7 +84,8 @@ int main(int c, char **v)
 	char *name;
 	ptr = malloc(sizeof(t_redirect));
 	head = ptr;
-	char *line =  "    >> amalia  >>b>>c<t<o>p<<t<<u ls <t >u -la";
+	char *line =  "    >> amalia  >>b>>c<t<o>p<<t<<u     ls <t >u -la";
+    // char *line =  ">> a ls";
 	x = 1;
 	while (line[i] != '\0')
 	{
@@ -72,7 +107,7 @@ int main(int c, char **v)
 		}
 		i++;
 	}
-    // print_redirect(head);
+    //print_redirect(head);
     get_cmd(line);
 	return (0);
 }
