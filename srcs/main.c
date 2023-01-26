@@ -24,8 +24,10 @@ int main(int c, char **v)
 {
 	t_redirect	*ptr;
 	t_redirect	*head;
+
 	// char		**cmd_arr;
     t_cmd       *cmd = malloc(sizeof(t_cmd));
+    t_cmd       *ccmd;
 	int i = 0;
 	int	x;
 	int start;
@@ -34,6 +36,7 @@ int main(int c, char **v)
     int k;
 	ptr = malloc(sizeof(t_redirect));
 	head = ptr;
+    ccmd = cmd;
 	char *line =  "    >> amalia ls <t >u -la";
     // char *line =  ">> a lokoos";
 	x = 1;
@@ -66,14 +69,14 @@ int main(int c, char **v)
             while (line[i] && (ft_isalpha(line[i]) || line[i] == '-'))
                 i++;
             cmd->cmd = ft_substr(line, k, i - k);
-            printf("cmd: %s\n", cmd->cmd);
-            // cmd->next = malloc(sizeof(t_cmd));
-            // cmd = cmd->next;
+            // printf("cmd: %s\n", cmd->cmd);
+            cmd->next = malloc(sizeof(t_cmd));
+            cmd = cmd->next;
         }
 		i++;
 	}
     print_redirect(head);
-    // print_cmd(cmd);
+    print_cmd(ccmd);
     // get_cmd(line);
 	return (0);
 }
