@@ -20,6 +20,7 @@ void    print_cmd(t_cmd *token)
     }
 }
 
+
 int main(int c, char **v)
 {
 	t_redirect	*ptr;
@@ -31,14 +32,12 @@ int main(int c, char **v)
 	int i = 0;
 	int	x;
 	int start;
-    int j;
 	char *name;
     int k;
 	ptr = malloc(sizeof(t_redirect));
 	head = ptr;
     ccmd = cmd;
-	char *line =  "    >> amalia ls <t >u -la";
-    // char *line =  ">> a lokoos";
+	char *line =  ft_strdup("    >> amalia ls <t >u -la");
 	x = 1;
 	while (line[i] != '\0')
 	{
@@ -46,7 +45,7 @@ int main(int c, char **v)
             i++;
 		if (is_redirect_in(line[i]) || is_redirect_out(line[i]))
 		{
-			if (is_append(line[i], line[i + 1]))
+			if (line[i + 1] && is_append(line[i], line[i + 1]))
 				x++;
 			ptr->flag = ft_substr(line, i, x);
 			i += x;
@@ -63,21 +62,22 @@ int main(int c, char **v)
 		}
         else
         {
-            while (ft_isspace(line[i]))
-                i++;
-            k = i;
-            while (line[i] && (ft_isalpha(line[i]) || line[i] == '-'))
-                i++;
-            cmd->cmd = ft_substr(line, k, i - k);
-            // printf("cmd: %s\n", cmd->cmd);
-            cmd->next = malloc(sizeof(t_cmd));
-            cmd = cmd->next;
-        }
+            if (i < ft_strlen(line))
+            {
+                while (ft_isspace(line[i]))
+                    i++;
+                k = i;
+                while (line[i] && (ft_isalpha(line[i]) || line[i] == '-'))
+                    i++;
+                cmd->cmd = ft_substr(line, k, i - k);
+                cmd->next = malloc(sizeof(t_cmd));
+                cmd = cmd->next;
+            }
+        } 
 		i++;
 	}
     print_redirect(head);
     print_cmd(ccmd);
-    // get_cmd(line);
 	return (0);
 }
 
