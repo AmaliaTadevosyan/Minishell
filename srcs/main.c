@@ -20,7 +20,6 @@ void    print_cmd(t_cmd *token)
     }
 }
 
-
 int main(int c, char **v)
 {
 	t_redirect	*ptr;
@@ -34,10 +33,11 @@ int main(int c, char **v)
 	int start;
 	char *name;
     int k;
+    int count;
 	ptr = malloc(sizeof(t_redirect));
 	head = ptr;
     ccmd = cmd;
-	char *line =  ft_strdup("    >> amalia ls <t >u -la");
+	char *line =  ft_strdup("echo  >> amalia ls <t >u -la \"he'l'lo >>  m\" 'hello  \"   world'   ");
 	x = 1;
 	while (line[i] != '\0')
 	{
@@ -60,6 +60,27 @@ int main(int c, char **v)
 			ptr = ptr->next;
 			x = 1;
 		}
+        else if (line[i] == '"') 
+        {
+            count_qoutes(line, &i);
+            i++;
+            start = i;
+            while (line[i] != '"')
+                i++;
+            cmd->cmd = ft_substr(line, start, i - start);
+            cmd->next = malloc(sizeof(t_cmd));
+            cmd = cmd->next;
+        }
+        else if (line[i] == '\'')
+        {
+            i++;
+            start = i;
+            while (line[i] != '\'')
+                i++;
+            cmd->cmd = ft_substr(line, start, i - start);
+            cmd->next = malloc(sizeof(t_cmd));
+            cmd = cmd->next;
+        }
         else
         {
             if (i < ft_strlen(line))
@@ -73,7 +94,7 @@ int main(int c, char **v)
                 cmd->next = malloc(sizeof(t_cmd));
                 cmd = cmd->next;
             }
-        } 
+        }
 		i++;
 	}
     print_redirect(head);

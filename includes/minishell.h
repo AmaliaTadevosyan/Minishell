@@ -93,6 +93,6 @@ int		ft_exit(char *str);
 int 	ft_cd(char *str);
 t_token	*create_token(char *str);
 bool	is_append(char c, char d);
-
+int count_qoutes(char *str, int *i);
 
 #endif 
