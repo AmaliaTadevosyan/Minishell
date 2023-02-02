@@ -12,14 +12,14 @@
 
 #include "libft.h"
 
-void	ft_lstclear(t_token **lst, void (*del)(int))
+void	ft_lstclear(t_token **lst, void (*del)(char *))
 {
 	t_token	*tmp;
 
 	while (*lst != NULL)
 	{
 		tmp = (*lst)->next;
-		del((*lst)->value);
+		del((*lst)->arg);
 		free(*lst);
 		*lst = tmp;
 	}

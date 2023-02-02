@@ -12,8 +12,8 @@
 
 #include "libft.h"
 
-void	ft_lstdelone(t_token *lst, void (*del)(int))
+void	ft_lstdelone(t_token *lst, void (*del)(char *))
 {
-	del(lst->value);
+	del(lst->arg);
 	free(lst);
 }

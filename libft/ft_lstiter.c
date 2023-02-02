@@ -12,14 +12,14 @@
 
 #include "libft.h"
 
-void	ft_lstiter(t_token *lst, void *(*f)(int))
+void	ft_lstiter(t_token *lst, void *(*f)(char *))
 {
 	t_token	*tmp;
 
 	tmp = lst;
 	while (tmp)
 	{
-		f(tmp->value);
+		f(tmp->arg);
 		tmp = tmp -> next;
 	}
 }

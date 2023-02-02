@@ -12,15 +12,14 @@
 
 #include "libft.h"
 
-t_token	*ft_lstnew(char *type, int data)
+t_token	*ft_lstnew(char *arg)
 {
 	t_token	*new_node;
 
 	new_node = (t_token *)malloc(sizeof(t_token));
 	if (new_node == NULL)
 		return (NULL);
-	new_node -> type = type;
-	new_node -> value = data;
+	new_node -> arg = arg;
 	new_node -> next = NULL;
 	return (new_node);
 }
