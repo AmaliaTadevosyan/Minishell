@@ -20,6 +20,40 @@ void    print_cmd(t_cmd *token)
     }
 }
 
+int count_quote(char *s, char c)
+{
+    int i;
+    int count;
+
+    i = 0;
+    count = 0;
+    while (s[i])
+    {
+        if (s[i] == c)
+            count++;
+        i++;
+    }
+    return (count);
+}
+
+char    *clean_quotes(char *str)
+{
+    int     i;
+    int     j;
+    char    *clean;
+
+    i = 0;
+    j = 0;
+    clean = ft_strdup("");
+    while (str[i])
+    {
+        if (str[i] != '\'' && count_quote(str, '\'') % 2 == 0)
+            clean[j++] = str[i];
+        i++;
+    }
+    return (clean);
+}
+
 int main(int c, char **v)
 {
 	t_redirect	*ptr;
@@ -37,7 +71,7 @@ int main(int c, char **v)
 	ptr = malloc(sizeof(t_redirect));
 	head = ptr;
     ccmd = cmd;
-	char *line =  ft_strdup("echo  >> amalia ls <t >u -la \"he'l'lo >>  m\" 'hello  \"   world'   ");
+	char *line =  ft_strdup("ec''''ho  >> 'amalia | ls' <t >u -la \"he'l'lo >>  m\" |  'hello  \"   world'   ");
 	x = 1;
 	while (line[i] != '\0')
 	{
@@ -60,27 +94,26 @@ int main(int c, char **v)
 			ptr = ptr->next;
 			x = 1;
 		}
-        else if (line[i] == '"') 
-        {
-            count_qoutes(line, &i);
-            i++;
-            start = i;
-            while (line[i] != '"')
-                i++;
-            cmd->cmd = ft_substr(line, start, i - start);
-            cmd->next = malloc(sizeof(t_cmd));
-            cmd = cmd->next;
-        }
-        else if (line[i] == '\'')
-        {
-            i++;
-            start = i;
-            while (line[i] != '\'')
-                i++;
-            cmd->cmd = ft_substr(line, start, i - start);
-            cmd->next = malloc(sizeof(t_cmd));
-            cmd = cmd->next;
-        }
+        // else if (line[i] == '"') 
+        // {
+        //     i++;
+        //     start = i;
+        //     while (line[i] != '"')
+        //         i++;
+        //     cmd->cmd = ft_substr(line, start, i - start);
+        //     cmd->next = malloc(sizeof(t_cmd));
+        //     cmd = cmd->next;
+        // }
+        // else if (line[i] == '\'')
+        // {
+        //     i++;
+        //     start = i;
+        //     while (line[i] != '\'')
+        //         i++;
+        //     cmd->cmd = ft_substr(line, start, i - start);
+        //     cmd->next = malloc(sizeof(t_cmd));
+        //     cmd = cmd->next;
+        // }
         else
         {
             if (i < ft_strlen(line))
@@ -99,6 +132,10 @@ int main(int c, char **v)
 	}
     print_redirect(head);
     print_cmd(ccmd);
+    // char *l = "h'h'hyhyhyh\"\"\"\"\"\"Hel'''lo\"\"\"\"\"\" bhyyb  jhuhb";
+    // printf("' count: %d\n", count_quote(line, '\''));
+    // printf("\" count: %d\n", count_quote(line, '"'));
+    // printf("cleaned string: %s\n", clean_quotes(line));
 	return (0);
 }
 
