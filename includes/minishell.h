@@ -48,22 +48,21 @@ typedef struct s_redirect
 {
 	char *f_name;
 	char *flag;
-	char *type;
+	char **type;
 	struct s_redirect *next;
 } t_redirect;
+
+typedef struct s_evn
+{
+	char *key;
+	char *value;
+	struct s_env *next;
+} t_env;
 
 typedef struct s_shell
 {
 	int	exit_status;
 } t_shell;
-
-// typedef struct s_token
-// {
-// 	int		value;
-// 	char	*type;
-// 	struct	s_token *next;
-// 	struct	s_token *prev;
-// } t_token;
 
 typedef struct s_data
 {
@@ -71,6 +70,8 @@ typedef struct s_data
 	t_token	*token;
 	int		error_code;
 	t_shell shell;
+	t_redirect redirect;
+	t_env	*env;
 } t_data;
 
 typedef struct s_cmd
@@ -93,5 +94,7 @@ int		ft_exit(char *str);
 int 	ft_cd(char *str);
 t_token	*create_token(char *str);
 bool	is_append(char c, char d);
+int		init_env(t_data *data, char **envp);
+char	*get_env_value(char *key, t_data *data);
 
 #endif 
