@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lstseclast.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 17:02:41 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/11/22 17:02:42 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:03:28 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:03:29 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-t_token	*ft_lstlast(t_token *lst)
+t_token	*ft_lstseclast(t_token *lst)
 {
+	t_token	*sec_last;
+
 	if (lst == NULL)
 		return (lst);
 	while (lst->next != NULL)
+	{
+		sec_last = lst;
 		lst = lst->next;
-	return (lst);
+	}
+	return (sec_last);
 }

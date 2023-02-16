@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 17:02:29 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/11/22 17:02:30 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:03:34 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:03:35 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-void	ft_lstdelone(t_token *lst, void (*del)(char *))
+int	ft_lstsize(t_token *lst)
 {
-	del(lst->arg);
-	free(lst);
+	int		count;
+	t_token	*ptr;
+
+	count = 0;
+	ptr = lst;
+	if (lst == NULL)
+		return (0);
+	while (ptr != NULL)
+	{
+		count++;
+		ptr = ptr -> next;
+	}
+	return (count);
 }

@@ -18,12 +18,6 @@
 # include <unistd.h>
 # include <stdint.h>
 
-typedef struct s_token
-{
-	char			*arg;
-	struct s_token	*next;
-}	t_token;
-
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 int			ft_isalnum(int c);
@@ -60,16 +54,6 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
-t_token		*ft_lstnew(char *arg);
-void		ft_lstadd_front(t_token **lst, t_token *new);
-int			ft_lstsize(t_token *lst);
-t_token		*ft_lstlast(t_token *lst);
-void		ft_lstadd_back(t_token **lst, t_token *new);
-void		ft_lstdelone(t_token *lst, void (*del)(char *));
-void		ft_lstclear(t_token **lst, void (*del)(char *));
-void		ft_lstiter(t_token *lst, void *(*f)(char *));
-t_token		*ft_lstmap(t_token *lst, char *(*f)(char *), void (*del)(char *));
-t_token		*ft_lstseclast(t_token *lst);
 int			ft_issign(char c);
 void		ft_swap(int *a, int *b);
 

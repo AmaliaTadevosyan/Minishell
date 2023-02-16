@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 17:02:16 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/11/22 17:02:17 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:02:29 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:02:30 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-void	ft_lstclear(t_token **lst, void (*del)(char *))
+void	ft_lstdelone(t_token *lst, void (*del)(char *))
 {
-	t_token	*tmp;
-
-	while (*lst != NULL)
-	{
-		tmp = (*lst)->next;
-		del((*lst)->arg);
-		free(*lst);
-		*lst = tmp;
-	}
-	*lst = NULL;
+	del(lst->arg);
+	free(lst);
 }

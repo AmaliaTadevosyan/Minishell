@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 17:02:46 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/11/22 17:02:47 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:03:20 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:03:21 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-t_token	*ft_lstmap(t_token *lst, char *(*f)(char *), void (*del)(char *))
+t_token	*ft_lstnew(char *arg)
 {
-	t_token	*new_list;
 	t_token	*new_node;
 
-	new_list = NULL;
-	if (lst == NULL || f == NULL)
-		return (new_list);
-	while (lst)
-	{
-		new_node = ft_lstnew((f)(lst->arg));
-		if (new_node == NULL)
-		{
-			ft_lstclear(&new_list, del);
-			return (NULL);
-		}
-		ft_lstadd_back(&new_list, new_node);
-		lst = lst->next;
-	}
-	return (new_list);
+	new_node = (t_token *)malloc(sizeof(t_token));
+	if (new_node == NULL)
+		return (NULL);
+	new_node -> arg = arg;
+	new_node -> next = NULL;
+	return (new_node);
 }

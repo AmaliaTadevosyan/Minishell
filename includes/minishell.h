@@ -30,6 +30,7 @@
 // 	int				exit_t;//flag 0;
 // 	int				status;
 // } t_info;
+
 # define METACHARACTER "|&;<>() \n\t"
 
 typedef enum
@@ -43,6 +44,12 @@ typedef enum
 	SEMI_COLON,   // ;
 	WORD,         // "blah"
 } consts;
+
+typedef struct s_token
+{
+	char			*arg;
+	struct s_token	*next;
+}	t_token;
 
 typedef struct s_redirect
 {
@@ -81,20 +88,35 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 } t_cmd;
 
-
-
-int     is_space(char c);
-int     is_pipe(char c);
-int     is_redirect_in(char c);
-int     is_redirect_out(char c);
-int     is_word(char c);
-void    ft_echo(char *str);
-void    ft_pwd(char *cwd);
-int		ft_exit(char *str);
-int 	ft_cd(char *str);
-t_token	*create_token(char *str);
-bool	is_append(char c, char d);
-int		init_env(t_data *data, char **envp);
-char	*get_env_value(char *key, t_data *data);
+int     	is_space(char c);
+int     	is_pipe(char c);
+t_token		*ft_lstnew(char *arg);
+void		ft_lstadd_front(t_token **lst, t_token *new);
+int			ft_lstsize(t_token *lst);
+t_token		*ft_lstlast(t_token *lst);
+void		ft_lstadd_back(t_token **lst, t_token *new);
+void		ft_lstdelone(t_token *lst, void (*del)(char *));
+void		ft_lstclear(t_token **lst, void (*del)(char *));
+void		ft_lstiter(t_token *lst, void *(*f)(char *));
+t_token		*ft_lstmap(t_token *lst, char *(*f)(char *), void (*del)(char *));
+t_token		*ft_lstseclast(t_token *lst);
+int     	is_redirect_in(char c);
+int     	is_redirect_out(char c);
+int     	is_word(char c);
+void    	ft_echo(char *str);
+void    	ft_pwd(char *cwd);
+int			ft_exit(char *str);
+int 		ft_cd(char *str);
+t_token		*create_token(char *str);
+bool		is_append(char c, char d);
+int			init_env(t_data *data, char **envp);
+char		*get_env_value(char *key, t_data *data);
+t_token		*split_string(char *input, t_token *pipe);
+void		print_redirect(t_redirect *token);
+void		print_cmd(t_cmd *token);
+t_redirect	*split_redirect(t_token *pipe, t_redirect *ptr, t_cmd *cmd);
+char 		*get_flag(char *arg, int i, int x);
+char 		*get_f_name(char *arg, int start, int i);
+int			get_redirect_len(char *arg, int i);
 
 #endif 

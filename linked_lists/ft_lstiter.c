@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 17:02:04 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/11/22 17:02:05 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:02:35 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:02:36 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-void	ft_lstadd_back(t_token **lst, t_token *new)
+void	ft_lstiter(t_token *lst, void *(*f)(char *))
 {
-	t_token	*ptr;
+	t_token	*tmp;
 
-	if (*lst == NULL)
-		*lst = new;
-	else
-	{	
-		ptr = ft_lstlast(*lst);
-		ptr->next = new;
+	tmp = lst;
+	while (tmp)
+	{
+		f(tmp->arg);
+		tmp = tmp -> next;
 	}
 }

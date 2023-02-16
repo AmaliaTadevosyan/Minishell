@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amtadevo <amtadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 17:03:20 by amtadevo          #+#    #+#             */
-/*   Updated: 2022/11/22 17:03:21 by amtadevo         ###   ########.fr       */
+/*   Created: 2022/11/22 17:02:16 by amtadevo          #+#    #+#             */
+/*   Updated: 2022/11/22 17:02:17 by amtadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-t_token	*ft_lstnew(char *arg)
+void	ft_lstclear(t_token **lst, void (*del)(char *))
 {
-	t_token	*new_node;
+	t_token	*tmp;
 
-	new_node = (t_token *)malloc(sizeof(t_token));
-	if (new_node == NULL)
-		return (NULL);
-	new_node -> arg = arg;
-	new_node -> next = NULL;
-	return (new_node);
+	while (*lst != NULL)
+	{
+		tmp = (*lst)->next;
+		del((*lst)->arg);
+		free(*lst);
+		*lst = tmp;
+	}
+	*lst = NULL;
 }
