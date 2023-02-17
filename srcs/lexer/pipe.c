@@ -25,4 +25,4 @@ t_token	*split_string(char *input, t_token *pipe)
 		i++;
 	}
 	return (head);
-}
+}	

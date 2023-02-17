@@ -30,16 +30,3 @@ bool	is_append(char c, char d)
 {
 	return ((c == '>' && d == '>') || (c == '<' && d == '<'));
 }
-
-// int is_c(char *str)
-// {
-//     int i;
-
-//     i = 0;
-//     while (str[i] && !is_word(str[i]))
-//     {
-//         return (1);
-//         i++;
-//     }
-//     return (0);
-// }

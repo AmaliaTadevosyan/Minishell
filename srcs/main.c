@@ -6,7 +6,7 @@
 /*   By: tumolabs <tumolabs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:01:52 by tumolabs          #+#    #+#             */
-/*   Updated: 2023/02/16 18:10:48 by tumolabs         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:50:26 by tumolabs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,61 +40,37 @@ void	print_pipe(t_token *token)
 	}
 }
 
-int	main(int c, char **v, char **envp)
-{
-	t_redirect	*ptr;
-	t_redirect	*head;
+// int	main(int c, char **v, char **envp)
+// {
+// 	t_redirect	*ptr;
+// 	t_redirect	*head;
 
-	t_cmd       *cmd = malloc(sizeof(t_cmd));
-	t_token     *pipe = malloc(sizeof(t_token));
-	char *line =  ft_strdup("echo  >> amalia \"|\" ls <t >u -la | \"he'l'lo >> | m\" 'hello  \"  | world\"   ");
-	printf("line: %s\n", line);
-	pipe = split_string(line, pipe);
-	ptr = malloc(sizeof(t_redirect));
-	ptr = split_redirect(pipe, ptr, cmd);
-	print_redirect(head);
-	print_cmd(cmd);
-	print_pipe(pipe);
-	return (0);
-} 
+// 	t_cmd       *cmd = malloc(sizeof(t_cmd));
+// 	t_token     *pipe = malloc(sizeof(t_token));
+// 	char *line =  ft_strdup("echo  >> amalia \"|\" ls <t >u -la | \"he'l'lo >> | m\" 'hello  \"  | world\"   ");
+// 	printf("line: %s\n", line);
+// 	pipe = split_string(line, pipe);
+// 	ptr = malloc(sizeof(t_redirect));
+// 	ptr = split_redirect(pipe, ptr, cmd);
+// 	print_redirect(head);
+// 	print_cmd(cmd);
+// 	print_pipe(pipe);
+// 	return (0);
+// } 
 
-/*
-int main()
-{
-	// char *cmd;
-	// char **line;
 
-	// while(1)
-	// {
-		// cmd = readline("minishell$ ");
-		//printf("%s\n", cmd);  
-		// line = ft_split(cmd, ' ');
-		// ft_echo(&cmd[5]);
-		// int i = 0;
-		// while (cmd[i])
-		// {
-		//     printf("cmd[%d]= %c\n", i, cmd[i]);
-		//     i++;
-		// }
-		// i = 0;
-		// while (line[i])
-		// {
-		//     printf("line[%d]= %s\n", i, line[i]);
-			// i++;
-		// }
-		// printf("cmd[5]: %c\n", cmd[5]);
-		// ft_cd(line[1]);
-		// ft_exit(cmd);
-		// printf("hello\n");
-		// char *line =  "    >>amalia >>b>>c<t<o>p<<t<<u ls <t >u -la";
-		// // char *line =  "'echo'  \"cd\"";
-		// // t_redirect *token = malloc(sizeof(t_redirect));
-		t_redirect *tmp;
+int main() {
+  int rl_catch_signals = 0; // disable signal catching by readline
+  signal(SIGINT, sig_handler);
 
-		// tmp = create_token(line);
-		// print_redirect(tmp);
-		// ft_pwd(&cmd[3]);1
-	// }
-	return (0);
-} 
-*/
+  char* line;
+  while ((line = readline("> ")) != NULL) {
+    add_history(line);
+
+    printf("hello!\n");
+
+    free(line);
+  }
+
+  return 0;
+}

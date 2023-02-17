@@ -5,6 +5,7 @@
 # include <stdio.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
@@ -118,5 +119,7 @@ t_redirect	*split_redirect(t_token *pipe, t_redirect *ptr, t_cmd *cmd);
 char 		*get_flag(char *arg, int i, int x);
 char 		*get_f_name(char *arg, int start, int i);
 int			get_redirect_len(char *arg, int i);
+void		sig_handler(int signum);
+void		ctrl_slash_handler(int i);
 
 #endif 
