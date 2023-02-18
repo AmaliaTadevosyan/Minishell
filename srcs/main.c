@@ -40,37 +40,37 @@ void	print_pipe(t_token *token)
 	}
 }
 
-// int	main(int c, char **v, char **envp)
-// {
-// 	t_redirect	*ptr;
-// 	t_redirect	*head;
+int	main(int c, char **v, char **envp)
+{
+	t_redirect	*ptr;
+	t_redirect	*head;
 
-// 	t_cmd       *cmd = malloc(sizeof(t_cmd));
-// 	t_token     *pipe = malloc(sizeof(t_token));
-// 	char *line =  ft_strdup("echo  >> amalia \"|\" ls <t >u -la | \"he'l'lo >> | m\" 'hello  \"  | world\"   ");
-// 	printf("line: %s\n", line);
-// 	pipe = split_string(line, pipe);
-// 	ptr = malloc(sizeof(t_redirect));
-// 	ptr = split_redirect(pipe, ptr, cmd);
-// 	print_redirect(head);
-// 	print_cmd(cmd);
-// 	print_pipe(pipe);
-// 	return (0);
-// } 
+	t_cmd       *cmd = malloc(sizeof(t_cmd));
+	t_token     *pipe = malloc(sizeof(t_token));
+	char *line =  ft_strdup("echo  >> amalia \"|\" ls <t >u -la | \"he'l'lo >> | m\" 'hello  \"  | world\"   ");
+	printf("line: %s\n", line);
+	pipe = split_string(line, pipe);
+	ptr = malloc(sizeof(t_redirect));
+	ptr = split_redirect(pipe, ptr, cmd);
+	print_redirect(head);
+	print_cmd(cmd);
+	print_pipe(pipe);
+	return (0);
+} 
 
 
-int main() {
-  int rl_catch_signals = 0; // disable signal catching by readline
-  signal(SIGINT, sig_handler);
+// int main() {
+//   int rl_catch_signals = 0; // disable signal catching by readline
+//   signal(SIGINT, sig_handler);
 
-  char* line;
-  while ((line = readline("> ")) != NULL) {
-    add_history(line);
+//   char* line;
+//   while ((line = readline("> ")) != NULL) {
+//     add_history(line);
 
-    printf("hello!\n");
+//     printf("hello!\n");
 
-    free(line);
-  }
+//     free(line);
+//   }
 
-  return 0;
-}
+//   return 0;
+// }
