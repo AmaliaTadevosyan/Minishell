@@ -2,7 +2,7 @@ RED="\033[1;31m"
 GREEN='\033[3;32m'
 NONE='\033[0m'
 
-PREFIX = $(shell find ${HOME} -name rd 2>/dev/null)
+PREFIX = $(shell find ${HOME} -name readlinem  2>/dev/null)
 
 NAME = minishell
 
@@ -14,9 +14,9 @@ SRCS = $(wildcard *.c) $(wildcard srcs/*.c) $(wildcard srcs/builtins/*.c) $(wild
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
-INCLUDES = -I./includes
+INCLUDES = -I./includes -I./readlinem/include
 
-LINKERS	= -L./libft -lft  -lreadline# -L./rd/lib
+LINKERS	= -L./libft -lft  -L./readlinem/lib -lreadline
 
 LINKERLIB = ./libft/libft.a
 
@@ -45,12 +45,12 @@ fclean: clean
 	# @stty sane
 	# @echo $(NONE) $(RED)"       >Removed< $(NAME)" $(NONE)
 
-# readline: 
-# 	cd readline-master && make clean && ./configure --prefix=$(PREFIX) && make && make install
+readline: 
+	cd readline-master && make clean && ./configure --prefix=$(PREFIX) && make && make install
 
 re: fclean all
 
 norm: clean
 	norminette $(SRCS)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re readline

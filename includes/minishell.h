@@ -121,5 +121,6 @@ char 		*get_f_name(char *arg, int start, int i);
 int			get_redirect_len(char *arg, int i);
 void		sig_handler(int signum);
 void		ctrl_slash_handler(int i);
+int			check_quotes(char *str);
 
 #endif 

@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.0
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /Users/tumolabs/Desktop/Minishell/rd
+prefix = /Users/amtadevo/Desktop/minishello/readlinem
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/tumolabs/Desktop/Minishell/readline-master
+BUILD_DIR = /Users/amtadevo/Desktop/minishello/readline-master
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c
